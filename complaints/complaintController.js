@@ -6,8 +6,7 @@ const addcomplaint = (req, res) => {
   const complaint1 = new complaint({
     advId: req.body.advId,
       userId:req.body.userId,
-      internId:req.body.internId,
-      jrId:req.body.jrId,
+     
       complaint:req.body.complaint,
       date:new Date()
 
@@ -35,8 +34,7 @@ const addcomplaint = (req, res) => {
 const viewAllcomplaints = (req, res) => {
   complaint.find()
     .populate('advId')
-    .populate('internId')
-    .populate('jrId')
+   
     .populate('userId')
   .exec().
     then((complaints) => {
@@ -79,7 +77,31 @@ const deletecomplaintById = (req, res) => {
 
 
 const viewcomplaintById = (req, res) => {
-  complaint.findById({ _id: req.params.id })
+  complaint.findById({ _id: req.params.id }) .populate('advId')
+   
+  .populate('userId')
+    .exec().
+    then((complaints) => {
+      res.json({
+        status:200,
+        message: "complaints deleted successfully",
+        data: complaints,
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.json({
+        status:500,
+        message: "Error retrieving complaints",
+        error: err,
+      });
+    });
+};
+
+
+const viewcomplaintByUserId = (req, res) => {
+  complaint.find({ userId: req.params.id }) .populate('advId')
+   
     .exec().
     then((complaints) => {
       res.json({
@@ -100,11 +122,11 @@ const viewcomplaintById = (req, res) => {
 
 
 
-
 module.exports = {
   addcomplaint,
   viewAllcomplaints,
   viewcomplaintById,
   deletecomplaintById,
+  viewcomplaintByUserId
  
 }
