@@ -12,16 +12,7 @@ const complaintSchema = new Schema(
               ref: "users"
             
             },
-            internId:{
-              type: mongoose.Schema.Types.ObjectId,
-             ref:'interns'
-              
-            },
-            jrId:{
-              type: mongoose.Schema.Types.ObjectId,
-              ref: "junioradvocates",
-             
-            },date:{
+          date:{
               type: Date,
               required: true,
             },

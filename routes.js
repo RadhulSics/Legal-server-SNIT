@@ -103,6 +103,7 @@ router.post('/addComplaint',complaints.addcomplaint)
 router.post('/viewAllComplaints',complaints.viewAllcomplaints)
 router.post('/viewComplaintById/:id',complaints.viewcomplaintById)
 router.post('/deleteComplaintById/:id',complaints.deletecomplaintById)
+router.post('/viewcomplaintByUserId/:id',complaints.viewcomplaintByUserId)
 
 //reviews
 router.post('/addReview',Reviews.addReview)
