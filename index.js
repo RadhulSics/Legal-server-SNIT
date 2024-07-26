@@ -10,7 +10,7 @@ app.use(express.static( `${__dirname}/upload`));
 
 app.use(cors())
 const route=require('./routes')
-app.use('/legal_practice',route)
+app.use('/legal_practice_api',route)
 
 app.listen(4041,()=>{
     console.log("Server created successfully at 4041");
