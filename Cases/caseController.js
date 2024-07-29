@@ -60,7 +60,7 @@ const createCase = async (req, res) => {
 // Get all cases
 const getAllCases = async (req, res) => {
   try {
-    const cases = await Case.find();
+    const cases = await Case.find().populate('userId advocateId');
     res.json({
       status: 200,
       data: cases,
@@ -100,7 +100,7 @@ const getCaseByUserId = async (req, res) => {
 // Get a single case by ID
 const getCaseById = async (req, res) => {
   try {
-    const caseItem = await Case.findById({ _id: req.params.id }).populate('advocateId');
+    const caseItem = await Case.findById({ _id: req.params.id }).populate('advocateId userId');
     if (!caseItem) {
       return res.json({
         status: 404,
