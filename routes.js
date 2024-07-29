@@ -114,6 +114,7 @@ router.post('/viewAllreviewsByAdvId/:id',Reviews.viewAllreviewsByAdvId)
 //for barcouncil
 router.post('/deBarAdvocateById/:id',advocates.deBarAdvocateById)
 router.post('/removeDeBarAdvocateById/:id',advocates.removeDeBarAdvocateById)
+router.post('/viewDebarredAdvocates',advocates.viewDebarredAdvocates)
 
 
 //appeals
