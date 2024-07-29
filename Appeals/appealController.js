@@ -1,13 +1,19 @@
 const Appeal = require('./apppealSchema'); 
 
 // Add a new appeal
-const addAppeal = (req, res) => {
+const addAppeal =async (req, res) => {
+  const datas=await Appeal.findOne({advId: req.params.id,appealStatus:'open'})
     const appeal = new Appeal({
         advId: req.params.id,
         reason: req.body.reason,
     });
-
-    appeal
+if(datas){
+  return  res.json({
+        status: 200,
+        message: 'You have already send Appeal once !!',
+    });
+}
+    await appeal
         .save()
         .then((data) => {
             res.json({
