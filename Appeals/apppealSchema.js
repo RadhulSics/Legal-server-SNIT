@@ -11,7 +11,10 @@ const appealSchema = new Schema({
         required: true,
        
     },
-   
+    reply: {
+        type: String,
+       
+    },
     status: {
         type: String,
         enum: ['Pending', 'Reviewed'],
