@@ -131,7 +131,7 @@ const viewAppealsByAdvId = (req, res) => {
 const replyAppealsById = (req, res) => {
     Appeal
         .findByIdAndUpdate({ _id: req.params.id },{
-            status:Reviewed,
+            status:'Reviewed',
             reply:req.body.reply
         })
         .populate('advId')
