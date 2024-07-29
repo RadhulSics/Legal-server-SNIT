@@ -20,6 +20,11 @@ const appealSchema = mongoose.Schema({
         enum: ['Pending', 'Reviewed'],
         default: 'Pending'
     },
+    appealStatus:{
+        type: String,
+        enum: ['open', 'closed'],
+        default: 'open'
+    }
     
 }, {
     timestamps: true 

@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const secret = 'advocate'; 
 
 const multer = require("multer");
+const apppealSchema = require('../Appeals/apppealSchema');
 
 
 const storage = multer.diskStorage({
@@ -552,8 +553,8 @@ const deBarAdvocateById = (req, res) => {
 };
 
 // remove debar Advocate
-const removeDeBarAdvocateById = (req, res) => {
-    Advocate.findByIdAndUpdate({_id:req.params.id},{debarred:false})
+const removeDeBarAdvocateById =async (req, res) => {
+  await  Advocate.findByIdAndUpdate({_id:req.params.id},{debarred:false})
         .exec()
         .then(data => {
             if (data.length > 0) {
@@ -576,6 +577,9 @@ const removeDeBarAdvocateById = (req, res) => {
                 Error: err
             });
         });
+        await  apppealSchema.findByIdAndUpdate({_id:req.body.appealId},{appealStatus:'closed'})
+
+
 };
 
 // debar Advocate
