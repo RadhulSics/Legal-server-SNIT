@@ -524,6 +524,86 @@ const addRating = (req, res) => {
       });
   };
   
+// debar Advocate
+const deBarAdvocateById = (req, res) => {
+    Advocate.findByIdAndUpdate({_id:req.params.id},{debarred:true})
+        .exec()
+        .then(data => {
+            if (data.length > 0) {
+                res.json({
+                    status: 200,
+                    msg: "Advocate debarred successfully",
+                    data: data
+                });
+            } else {
+                res.json({
+                    status: 200,
+                    msg: "No Data obtained"
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: 500,
+                msg: "Data not obtained",
+                Error: err
+            });
+        });
+};
+
+// remove debar Advocate
+const removeDeBarAdvocateById = (req, res) => {
+    Advocate.findByIdAndUpdate({_id:req.params.id},{debarred:false})
+        .exec()
+        .then(data => {
+            if (data.length > 0) {
+                res.json({
+                    status: 200,
+                    msg: "Advocate debarred successfully",
+                    data: data
+                });
+            } else {
+                res.json({
+                    status: 200,
+                    msg: "No Data obtained"
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: 500,
+                msg: "Data not obtained",
+                Error: err
+            });
+        });
+};
+
+// debar Advocate
+const viewDebarredAdvocates = (req, res) => {
+    Advocate.find({debarred:true})
+        .exec()
+        .then(data => {
+            if (data.length > 0) {
+                res.json({
+                    status: 200,
+                    msg: " debarred advocates obtained successfully",
+                    data: data
+                });
+            } else {
+                res.json({
+                    status: 200,
+                    msg: "No Data obtained"
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: 500,
+                msg: "Data not obtained",
+                Error: err
+            });
+        });
+};
 module.exports = {
     registerAdvocate,
     viewAdvocates,
@@ -542,5 +622,8 @@ module.exports = {
     deactivateAdvocateById,
     uploadProfile,
     viewAdvocatesBySpecializn,
-    addRating
+    addRating,
+    removeDeBarAdvocateById,
+    deBarAdvocateById,
+    viewDebarredAdvocates
 };

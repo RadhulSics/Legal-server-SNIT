@@ -88,6 +88,10 @@ const advSchema=mongoose.Schema({
         type:Number,
         default:0
       },
+      debarred:{
+        type:Boolean,
+        default:false
+    }
       
 });
 module.exports=mongoose.model('advocates',advSchema)

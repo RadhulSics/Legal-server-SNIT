@@ -10,6 +10,7 @@ const Evidences=require('./Cases/Evidences/evidenceController')
 const blog=require('./Blogs/blogController')
 const complaints=require('./complaints/complaintController')
 const Reviews=require('./Reviews/reviewController')
+const Appeal=require('./Appeals/appealController')
 
 
 //advocate routes
@@ -109,6 +110,21 @@ router.post('/viewcomplaintByUserId/:id',complaints.viewcomplaintByUserId)
 //reviews
 router.post('/addReview',Reviews.addReview)
 router.post('/viewAllreviewsByAdvId/:id',Reviews.viewAllreviewsByAdvId)
+
+//for barcouncil
+router.post('/deBarAdvocateById/:id',advocates.deBarAdvocateById)
+router.post('/removeDeBarAdvocateById/:id',advocates.removeDeBarAdvocateById)
+router.post('/viewDebarredAdvocates',advocates.viewDebarredAdvocates)
+
+
+//appeals
+router.post('/addAppeal/:id',Appeal.addAppeal)
+router.post('/viewAllPendingAppeals',Appeal.viewAllPendingAppeals)
+router.post('/viewAppealById/:id',Appeal.viewAppealById)
+router.post('/deleteAppealById/:id',Appeal.deleteAppealById)
+router.post('/viewAppealsByAdvId/:id',Appeal.viewAppealsByAdvId)
+router.post('/replyAppealsById/:id',Appeal.replyAppealsById)
+
 
 
 module.exports=router
