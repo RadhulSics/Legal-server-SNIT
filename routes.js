@@ -11,6 +11,7 @@ const blog=require('./Blogs/blogController')
 const complaints=require('./complaints/complaintController')
 const Reviews=require('./Reviews/reviewController')
 const Appeal=require('./Appeals/appealController')
+const Policy=require('./LegalPolicy/policyController')
 
 
 //advocate routes
@@ -125,6 +126,12 @@ router.post('/deleteAppealById/:id',Appeal.deleteAppealById)
 router.post('/viewAppealsByAdvId/:id',Appeal.viewAppealsByAdvId)
 router.post('/replyAppealsById/:id',Appeal.replyAppealsById)
 
+//Policies
+router.post('/addPolicy',Policy.addPolicy)
+router.post('/viewAllPolicy',Policy.viewAllPolicy)
+router.post('/viewadvocatePolicy',Policy.viewadvocatePolicy)
+router.post('/viewuserPolicy',Policy.viewuserPolicy)
+router.post('/updatePolicyById',Policy.updatePolicyById)
 
 
 module.exports=router
