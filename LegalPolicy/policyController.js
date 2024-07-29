@@ -1,10 +1,10 @@
-const Appeal = require('./apppealSchema'); 
+const Policy = require('./policySchema'); 
 
 // Add a new appeal
 const addPolicy = (req, res) => {
-    const appeal = new Appeal({
-        advId: req.params.id,
-        reason: req.body.reason,
+    const appeal = new Policy({
+        user: req.body.user,
+        advocate: req.body.advocate,
     });
 
     appeal
@@ -12,24 +12,24 @@ const addPolicy = (req, res) => {
         .then((data) => {
             res.json({
                 status: 200,
-                message: 'Appeal added successfully',
+                message: 'Policy added successfully',
                 data: data,
             });
         })
         .catch((err) => {
             console.error(err);
             res.status(500).json({
-                message: 'Error adding appeal',
+                message: 'Error adding Policy',
                 error: err,
             });
         });
 };
 
-// View all pending appeals
-const viewAllPendingAppeals = (req, res) => {
+// View all  
+const viewAllPolicy = (req, res) => {
     Appeal
-        .find({status:'Pending'})
-        .populate('advId')
+        .findOne({type:'policy'})
+      
         .exec()
         .then((appeals) => {
             res.status(200).json({
@@ -47,37 +47,56 @@ const viewAllPendingAppeals = (req, res) => {
         });
 };
 
-// View an appeal by ID
-const viewAppealById = (req, res) => {
+const viewuserPolicy = (req, res) => {
     Appeal
-        .findById(req.params.id)
-        .populate('advId')
+        .findOne({type:'policy'},{user:1})
+      
         .exec()
-        .then((appeal) => {
-            if (!appeal) {
-                return res.status(404).json({
-                    message: 'Appeal not found',
-                });
-            }
+        .then((appeals) => {
             res.status(200).json({
                 status: 200,
-                message: 'Appeal retrieved successfully',
-                data: appeal,
+                message: 'Appeals retrieved successfully',
+                data: appeals,
             });
         })
         .catch((err) => {
             console.error(err);
             res.status(500).json({
-                message: 'Error retrieving appeal',
+                message: 'Error retrieving appeals',
                 error: err,
             });
         });
 };
 
-// Delete an appeal by ID
-const deleteAppealById = (req, res) => {
+const viewadvocatePolicy = (req, res) => {
     Appeal
-        .findByIdAndDelete(req.params.id)
+        .findOne({type:'policy'},{advocate:1})
+      
+        .exec()
+        .then((appeals) => {
+            res.status(200).json({
+                status: 200,
+                message: 'Appeals retrieved successfully',
+                data: appeals,
+            });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({
+                message: 'Error retrieving appeals',
+                error: err,
+            });
+        });
+};
+// update an Policy by ID
+const updatePolicyById = (req, res) => {
+    Policy
+        .findOneAndUpdate({type:'policy'},
+            {
+                user: req.body.user,
+                advocate: req.body.advocate,
+            }
+        )
         .exec()
         .then((appeal) => {
             if (!appeal) {
@@ -100,56 +119,10 @@ const deleteAppealById = (req, res) => {
         });
 };
 
-// View appeals by advocate ID
-const viewAppealsByAdvId = (req, res) => {
-    Appeal
-        .find({ advId: req.params.id })
-        .populate('advId')
-        .exec()
-        .then((appeals) => {
-            res.status(200).json({
-                status: 200,
-                message: 'Appeals retrieved successfully',
-                data: appeals,
-            });
-        })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).json({
-                message: 'Error retrieving appeals',
-                error: err,
-            });
-        });
-};
-// View appeals by advocate ID
-const replyAppealsById = (req, res) => {
-    Appeal
-        .findByIdAndUpdate({ _id: req.params.id },{
-            status:Reviewed,
-            reply:req.body.reply
-        })
-        .populate('advId')
-        .exec()
-        .then((appeals) => {
-            res.status(200).json({
-                status: 200,
-                message: 'Appeals retrieved successfully',
-                data: appeals,
-            });
-        })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).json({
-                message: 'Error retrieving appeals',
-                error: err,
-            });
-        });
-};
 module.exports = {
-    addAppeal,
-    viewAllPendingAppeals,
-    viewAppealById,
-    deleteAppealById,
-    viewAppealsByAdvId,
-    replyAppealsById
+   addPolicy,
+   viewAllPolicy,
+   updatePolicyById,
+   viewadvocatePolicy,
+   viewuserPolicy
 };
