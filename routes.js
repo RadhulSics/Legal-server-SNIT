@@ -109,5 +109,8 @@ router.post('/viewcomplaintByUserId/:id',complaints.viewcomplaintByUserId)
 router.post('/addReview',Reviews.addReview)
 router.post('/viewAllreviewsByAdvId/:id',Reviews.viewAllreviewsByAdvId)
 
+//for barcouncil
+router.post('/deBarAdvocateById/:id',advocates.deBarAdvocateById)
+router.post('/removeDeBarAdvocateById/:id',advocates.removeDeBarAdvocateById)
 
 module.exports=router
