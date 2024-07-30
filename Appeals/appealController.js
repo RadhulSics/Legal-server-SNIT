@@ -34,7 +34,7 @@ if(datas){
 // View all pending appeals
 const viewAllPendingAppeals = (req, res) => {
     Appeal
-        .find({status:'Pending'})
+        .find()
         .populate('advId')
         .exec()
         .then((appeals) => {
