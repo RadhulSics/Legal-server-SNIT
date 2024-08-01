@@ -48,7 +48,10 @@ else{
 // Controller function to get all appointment requests
 const getAppointmentReqsForAdv = async (req, res) => {
   try {
+    let final=[]
     const appointments = await AppointmentReq.find({advocateId:req.params.id,status:'pending'}).populate('userId').populate('caseId').populate('advocateId');
+   
+   
     res.status(200).json({
       status: 200,
       msg: 'Appointments retrieved successfully',
@@ -126,6 +129,10 @@ console.log(err);
     const cases = await caseSchema.findByIdAndUpdate({_id:caseId},{
       advocateStatus:true,approvalStatus:true,advocateId:advocateId}
     )
+
+const upd= AppointmentReq.updateMany({caseId:caseId._id},{status:'closed'})
+
+
     res.json({
       status: 200,
       msg: 'Appointment request updated successfully',
