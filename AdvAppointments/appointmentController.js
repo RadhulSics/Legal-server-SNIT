@@ -130,7 +130,7 @@ console.log(err);
       advocateStatus:true,approvalStatus:true,advocateId:advocateId}
     )
 
-const upd= AppointmentReq.updateMany({caseId:caseId._id},{status:'closed'})
+const upd=await AppointmentReq.updateMany({caseId:caseId._id},{status:'closed'})
 
 
     res.json({
